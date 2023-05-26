@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:id="rootScreenPrincipal" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ui.screens.principal.PrincipalController"
+            prefHeight="400.0" prefWidth="600.0">
+    <top>
+        <MenuBar fx:id="menuPrincipal" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu fx:id="menuAccount" mnemonicParsing="false" text="Account">
+                    <items>
+                        <MenuItem fx:id="menuLogin" mnemonicParsing="false" onAction="#menuClick" text="Login"/>
+                        <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#menuClick" text="Logout"/>
+                        <MenuItem fx:id="menuRegister" mnemonicParsing="false" onAction="#menuClick" text="Register"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="menuIngredients" mnemonicParsing="false" text="Ingredients">
+                    <items>
+                        <MenuItem fx:id="menuGetAllIngredients" mnemonicParsing="false" onAction="#menuClick" text="Ingredients and by id" />
+                        <MenuItem fx:id="menuAddIngredient" mnemonicParsing="false" onAction="#menuClick" text="Add Ingredient" />
+                        <MenuItem fx:id="menuDeleteIngredient" mnemonicParsing="false" onAction="#menuClick" text="Delete Ingredient" />
+                        <MenuItem fx:id="menuUpdateIngredient" mnemonicParsing="false" onAction="#menuClick" text="Update Ingredient" />
+                    </items>
+                </Menu>
+                <Menu fx:id="menuRecipes" mnemonicParsing="false" text="Article">
+                    <items>
+                        <MenuItem fx:id="menuGetAllRecipes" mnemonicParsing="false" onAction="#menuClick" text="Recipes and by id" />
+                    </items>
+                    <items>
+                        <MenuItem fx:id="menuAddRecipe" mnemonicParsing="false" onAction="#menuClick" text="Add Recipe" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+</BorderPane>
+
