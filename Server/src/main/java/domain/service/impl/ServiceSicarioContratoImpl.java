@@ -5,6 +5,7 @@ import domain.service.ServiceSicarioContrato;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import model.SicarioContrato;
+import model.Usuario;
 import model.exception.ApiError;
 
 import java.util.List;
@@ -21,6 +22,11 @@ public class ServiceSicarioContratoImpl implements ServiceSicarioContrato {
     @Override
     public Either<ApiError, List<SicarioContrato>> getAll() {
         return dao.getAll();
+    }
+
+    @Override
+    public Either<ApiError, List<Usuario>> getSicariosByHabilityLevel(int parseInt) {
+        return dao.getSicariosByHabilityLevel(parseInt);
     }
 
     @Override

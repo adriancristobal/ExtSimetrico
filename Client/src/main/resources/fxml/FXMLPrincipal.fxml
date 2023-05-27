@@ -16,12 +16,9 @@
                         <MenuItem fx:id="menuRegister" mnemonicParsing="false" onAction="#menuClick" text="Register"/>
                     </items>
                 </Menu>
-                <Menu fx:id="menuContratos" mnemonicParsing="false" text="Contratos">
+                <Menu fx:id="menuContratista" mnemonicParsing="false" text="Contratistas">
                     <items>
-                        <MenuItem fx:id="menuGetAllContrato" mnemonicParsing="false" onAction="#menuClick" text="Contratos and by id" />
-                        <MenuItem fx:id="menuAddContrato" mnemonicParsing="false" onAction="#menuClick" text="Add Contrato" />
-                        <MenuItem fx:id="menuDeleteContrato" mnemonicParsing="false" onAction="#menuClick" text="Delete Contrato" />
-                        <MenuItem fx:id="menuUpdateContrato" mnemonicParsing="false" onAction="#menuClick" text="Update Contrato" />
+                        <MenuItem fx:id="menuContratistaItem" mnemonicParsing="false" onAction="#menuClick" text="WorkSpace Contratistas" />
                     </items>
                 </Menu>
                 <Menu fx:id="menuRecipes" mnemonicParsing="false" text="Article">

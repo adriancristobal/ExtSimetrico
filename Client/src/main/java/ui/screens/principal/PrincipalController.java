@@ -27,6 +27,7 @@ public class PrincipalController {
     private MenuItem menuRegister;
     @FXML
     private MenuItem menuLogout;
+
     private Stage primaryStage;
 
     Instance<Object> instance;
@@ -87,10 +88,7 @@ public class PrincipalController {
             case "menuRegister" -> cargarScreen(Screens.REGISTER);
             case "menuLogin" -> cargarScreen(Screens.LOGIN);
             case "menuLogout" -> cargarScreen(Screens.LOGOUT);
-            case "menuGetAllContratos" -> cargarScreen(Screens.SCREEN_GET_ALL_CONTRATO);
-            case "menuAddContrato" -> cargarScreen(Screens.SCREEN_ADD_CONTRATO);
-            case "menuDeleteContrato" -> cargarScreen(Screens.SCREEN_DELETE_CONTRATO);
-            case "menuUpdateContrato" -> cargarScreen(Screens.SCREEN_UPDATE_CONTRATO);
+            case "menuContratistaItem" -> cargarScreen(Screens.SCREEN_CONTRATISTAS);
         }
         /*if ("menuGetAllNewspaper".equals(((MenuItem) actionEvent.getSource()).getId())) {
             cargarScreen(Screens.Screen_GET_ALL_NEWSPAPER);

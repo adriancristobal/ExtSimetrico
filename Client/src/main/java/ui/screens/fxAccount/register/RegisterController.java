@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import model.Usuario;
 import ui.screens.common.BaseScreenController;
 
@@ -44,11 +45,13 @@ public class RegisterController extends BaseScreenController implements Initiali
         String username = tfUsername.getText();
         String password = tfPassword.getText();
         String type = ((RadioButton) tgType.getSelectedToggle()).getText();
-        int habilidad = cbHabilityLevel.getValue();
-        if (username.isEmpty() || password.isEmpty() || type.isEmpty() || habilidad == 0) {
+        if (username.isEmpty() || password.isEmpty() || type.isEmpty()) {
             errorBox.setText("Please complete all fields");
         } else {
-            Usuario userRegisterDTO = new Usuario(username, password, type, habilidad);
+            Usuario userRegisterDTO = new Usuario(username, password, type);
+            if (type.equals("SICARIO")) {
+                userRegisterDTO = new Usuario(username, password, type, cbHabilityLevel.getValue());
+            }
             errorBox.setText("");
             getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
             registerViewModel.register(userRegisterDTO);
@@ -86,8 +89,17 @@ public class RegisterController extends BaseScreenController implements Initiali
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);
         cbHabilityLevel.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        cbHabilityLevel.getSelectionModel().select(0);
+        cbHabilityLevel.getSelectionModel().selectFirst();
         changeStatus();
     }
 
+    @FXML
+    private void ifContratista(MouseEvent mouseEvent) {
+        cbHabilityLevel.setDisable(rbContratista.isSelected());
+    }
+
+    @FXML
+    private void ifSicario(MouseEvent mouseEvent) {
+        cbHabilityLevel.setDisable(!rbSicario.isSelected());
+    }
 }

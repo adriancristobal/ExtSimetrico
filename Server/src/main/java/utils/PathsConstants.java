@@ -20,6 +20,7 @@ public class PathsConstants {
 
     //3
     public static final String PATH_NEWSPAPER_FIND_ALL_LESS_THAN_DATE = "/findAllLessThanDate";
-    public static final String PATH_FIND_ONE = "/{id}"; ;
+    public static final String PATH_FIND_ONE = "/{id}";
+    public static final String PATH_BY_HABILITY_LEVEL = "/byHabilityLevel";
 
 }

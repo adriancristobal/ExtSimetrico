@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-@ToString
+
 public class Contrato {
 
     private int id;
@@ -14,4 +14,8 @@ public class Contrato {
     private String clave;
     private int id_contratista;
 
+    @Override
+    public String toString() {
+        return id + " - " + detalle;
+    }
 }

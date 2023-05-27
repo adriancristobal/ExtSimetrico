@@ -6,6 +6,8 @@ import io.reactivex.rxjava3.core.Single;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import model.Contrato;
+import model.SicarioContrato;
+import model.Usuario;
 
 import java.util.List;
 
@@ -40,6 +42,11 @@ public class DaoContratoClientImpl extends DaoGenerics implements DaoContratoCli
     @Override
     public Single<Either<String, String>> deleteContrato(int id) {
         return this.safeSingleVoidApicall(myApi.deleteContrato(id));
+    }
+
+    @Override
+    public Single<Either<String, List<Usuario>>> getSicariosByHabilityLevel(int habilityLevel) {
+        return this.safeSingleApicall(myApi.getSicariosByHabilityLevel(habilityLevel));
     }
 
 }

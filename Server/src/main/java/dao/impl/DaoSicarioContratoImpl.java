@@ -6,6 +6,7 @@ import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 import model.SicarioContrato;
+import model.Usuario;
 import model.exception.ApiError;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +36,19 @@ public class DaoSicarioContratoImpl implements DaoSicarioContrato {
         try {
             JdbcTemplate jtm = new JdbcTemplate(pool.getDataSource());
             List<SicarioContrato> list = jtm.query(QueryConstants.GET_ALL_SICARIOS_CONTRATOS, BeanPropertyRowMapper.newInstance(SicarioContrato.class));
+            result = Either.right(list);
+        } catch (Exception e) {
+            result = Either.left(new ApiError(ErrorConstants.ERROR_FIND_SICARIOS_CONTRATOS_LIST));
+        }
+        return result;
+    }
+
+    @Override
+    public Either<ApiError, List<Usuario>> getSicariosByHabilityLevel(int parseInt) {
+        Either<ApiError, List<Usuario>> result;
+        try {
+            JdbcTemplate jtm = new JdbcTemplate(pool.getDataSource());
+            List<Usuario> list = jtm.query(QueryConstants.GET_SICARIOS_CONTRATOS_BY_HABILITY_LEVEL, BeanPropertyRowMapper.newInstance(Usuario.class), parseInt);
             result = Either.right(list);
         } catch (Exception e) {
             result = Either.left(new ApiError(ErrorConstants.ERROR_FIND_SICARIOS_CONTRATOS_LIST));

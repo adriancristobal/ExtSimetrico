@@ -2,6 +2,8 @@ package dao.retrofit.calls;
 
 import io.reactivex.rxjava3.core.Single;
 import model.Contrato;
+import model.SicarioContrato;
+import model.Usuario;
 import retrofit2.Response;
 import retrofit2.http.*;
 
@@ -19,4 +21,6 @@ public interface CallContratoApi {
     Single<Contrato> putContrato(@Body Contrato contrato);
     @DELETE("contratos")
     Single<Response<Void>> deleteContrato(@Query("id") int id);
+    @GET("contratos/byHabilityLevel")
+    Single<List<Usuario>> getSicariosByHabilityLevel(@Query("habilityLevel") Integer habilityLevel);
 }

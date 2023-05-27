@@ -27,13 +27,13 @@
             <Font size="14.0" />
          </font>
         </Button>
-      <ComboBox fx:id="cbHabilityLevel" layoutX="252.0" layoutY="197.0" prefHeight="26.0" prefWidth="98.0" promptText="Level" />
-      <RadioButton fx:id="rbContratista" layoutX="254.0" layoutY="166.0" mnemonicParsing="false" selected="true" text="CONTRATISTA">
+      <ComboBox fx:id="cbHabilityLevel" layoutX="252.0" layoutY="197.0" prefHeight="26.0" prefWidth="98.0" promptText="Level" disable="true" />
+      <RadioButton fx:id="rbContratista" layoutX="254.0" layoutY="166.0" mnemonicParsing="false" selected="true" text="CONTRATISTA" onMouseClicked="#ifContratista">
          <toggleGroup>
             <ToggleGroup fx:id="tgType" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="rbSicario" layoutX="369.0" layoutY="165.0" mnemonicParsing="false" text="SICARIO" toggleGroup="$tgType" />
+      <RadioButton fx:id="rbSicario" layoutX="369.0" layoutY="165.0" mnemonicParsing="false" text="SICARIO" toggleGroup="$tgType" onMouseClicked="#ifSicario" />
       <Label layoutX="192.0" layoutY="165.0" text="Type">
          <font>
             <Font size="14.0" />

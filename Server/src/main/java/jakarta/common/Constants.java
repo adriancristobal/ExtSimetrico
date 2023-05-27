@@ -9,8 +9,8 @@ public class Constants {
     public static final String ID = "id";
     public static final String ID_CONTRATO = "id_contrato";
     public static final String ID_SICARIO = "id_sicario";
-    public static final String ROLE_SICARIO = "sicario";
-    public static final String ROLE_CONTRATISTA = "contratista";
+    public static final String ROLE_SICARIO = "SICARIO";
+    public static final String ROLE_CONTRATISTA = "CONTRATISTA";
     public static final String ROLES = "roles";
     public static final String USERNAME = "username";
     public static final String HEADER_AUTHORIZATION = "Authorization";
@@ -29,6 +29,5 @@ public class Constants {
     public static final String ISSUER = "Server";
 
 
-
-
+    public static final String HABILITY_LEVEL = "habilityLevel";
 }

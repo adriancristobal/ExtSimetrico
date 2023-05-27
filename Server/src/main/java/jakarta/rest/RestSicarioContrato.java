@@ -38,6 +38,8 @@ public class RestSicarioContrato {
         return r.get();
     }
 
+
+
     @POST
     public Response add(SicarioContrato sicarioContrato) {
         service.add(sicarioContrato);
@@ -58,5 +60,7 @@ public class RestSicarioContrato {
     public SicarioContrato update(SicarioContrato sicarioContrato) {
         return service.update(sicarioContrato);
     }
+
+
 
 }

@@ -1,6 +1,7 @@
 package jakarta.rest;
 
 import domain.service.ServiceContrato;
+import domain.service.ServiceSicarioContrato;
 import domain.service.impl.ServiceContratoImpl;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.common.Constants;
@@ -21,10 +22,12 @@ import java.util.concurrent.atomic.AtomicReference;
 public class RestContrato {
 
     private final ServiceContrato serviceContrato;
+    private final ServiceSicarioContrato service;
 
     @Inject
-    public RestContrato(ServiceContratoImpl serviceContrato) {
+    public RestContrato(ServiceContratoImpl serviceContrato, ServiceSicarioContrato service) {
         this.serviceContrato = serviceContrato;
+        this.service = service;
     }
 
     @GET
@@ -38,6 +41,17 @@ public class RestContrato {
         return r.get();
     }
 
+    @GET
+    @Path(PathsConstants.PATH_BY_HABILITY_LEVEL)
+    public Response getSicariosByHabilityLevel(@QueryParam(Constants.HABILITY_LEVEL) Integer habilityLevel) {
+        AtomicReference<Response> r = new AtomicReference<>();
+        service.getSicariosByHabilityLevel(habilityLevel)
+                .peek(list -> r.set(Response.ok(list).build()))
+                .peekLeft(apiError -> r.set(Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity(apiError)
+                        .build()));
+        return r.get();
+    }
     @POST
     public Response add(Contrato contrato) {
         serviceContrato.add(contrato);

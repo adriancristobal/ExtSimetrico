@@ -20,10 +20,18 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public Usuario(String nombre, String contrasenia, String tipo) {
+        this.nombre = nombre;
+        this.contrasenia = contrasenia;
+        this.tipo = tipo;
+    }
+
     public Usuario(String nombre, String contrasenia, String tipo, int habilidad) {
         this.nombre = nombre;
         this.contrasenia = contrasenia;
         this.tipo = tipo;
         this.habilidad = habilidad;
     }
+
+
 }
