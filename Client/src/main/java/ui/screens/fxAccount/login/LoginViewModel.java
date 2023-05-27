@@ -15,7 +15,7 @@ public class LoginViewModel {
 
     @Inject
     public LoginViewModel(ServiceLogeoClientImpl serviceLogClient) {
-        this.serviceLogClient = (ServiceLogeoClient) serviceLogClient;
+        this.serviceLogClient = serviceLogClient;
         _state = new SimpleObjectProperty<>(new LoginState(false,false, null));
     }
 

@@ -6,8 +6,10 @@ import io.reactivex.rxjava3.core.Single;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import model.Usuario;
+import service.ServiceContratoClient;
+import service.ServiceLogeoClient;
 
-public class ServiceLogeoClientImpl implements DaoLogeoClient {
+public class ServiceLogeoClientImpl implements ServiceLogeoClient {
 
     private DaoLogeoClient dao;
 

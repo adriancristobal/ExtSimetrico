@@ -14,12 +14,9 @@ public class QueryConstants {
     public static final String UPDATE_SICARIO_CONTRATO = "UPDATE recipes SET estado = ? WHERE id_contrato = ? AND id_sicario = ?";
 
 
-    public static final String GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
-    public static final String GET_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
-    public static final String GET_USER_BY_USERNAME_AND_PASSWORD = "SELECT * FROM users WHERE username = ? AND password = ?";
-    public static final String GET_ROLE_BY_ID = "SELECT r.name FROM users u INNER JOIN users_roles ur ON u.id = ur.user_id INNER JOIN roles r ON ur.role_id = r.id WHERE u.id = ?";
-    public static final String ADD_USER = "INSERT INTO users (username, email, password, date_register, activated, activation_code) VALUES (:username, :email, :password, :date_register, :activated, :activation_code)";
-    public static final String GET_USER_BY_ACTIVATION_CODE = "SELECT * FROM users WHERE activation_code = ?";
-    public static final String UPDATE_ACTIVATED_BY_ACTIVATION_CODE = "UPDATE users SET activated = ? WHERE activation_code = ?";
+    public static final String GET_USER_BY_USERNAME = "SELECT * FROM usuarios WHERE nombre = ?";
+    public static final String GET_USER_BY_USERNAME_AND_PASSWORD = "SELECT * FROM usuarios WHERE nombre = ? AND contrasenia = ?";
+    public static final String GET_ROLE_BY_ID = "SELECT u.tipo FROM usuarios u WHERE u.id = ?";
+    public static final String ADD_USER = "INSERT INTO usuarios (nombre, contrasenia, tipo, habilidad) VALUES (:nombre, :contrasenia, :tipo, :habilidad)";
 
 }

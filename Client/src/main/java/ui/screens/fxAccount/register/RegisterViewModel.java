@@ -15,7 +15,7 @@ public class RegisterViewModel {
 
     @Inject
     public RegisterViewModel(ServiceLogeoClientImpl serviceLogeoClient) {
-        this.serviceLogeoClient = (ServiceLogeoClient) serviceLogeoClient;
+        this.serviceLogeoClient = serviceLogeoClient;
         _state = new SimpleObjectProperty<>(new RegisterState(false,false, null));
     }
 

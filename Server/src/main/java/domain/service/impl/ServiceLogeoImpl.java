@@ -34,10 +34,6 @@ public class ServiceLogeoImpl implements ServiceLogeo {
         this.key = key;
     }
 
-    @Override
-    public Usuario get(String email) {
-        return dao.get(email);
-    }
 
     @Override
     public Usuario getByUsername(String username) {
@@ -59,31 +55,6 @@ public class ServiceLogeoImpl implements ServiceLogeo {
         return dao.add(user);
     }
 
-    @Override
-    public boolean verifyEmail(String activationCode) {
-        boolean result = false;
-        Usuario user = dao.findOneByActivationCode(activationCode);
-//        Duration duration = Duration.between(LocalTime.now(), user.getDate_register());
-//        if (duration.toMinutes() < 5) {
-//            try {
-//                if (user.getActivation_code().equals(activationCode)) {
-//                    int r = dao.updateActivatedByToken(1, activationCode);
-//                    if (r == 1) {
-//                        result = true;
-//                    } else {
-//                        log.error("Error with update");
-//                    }
-//                } else {
-//                    log.error("Error with tokens. Not equals");
-//                }
-//            } catch (Exception e) {
-//                log.error(e.getMessage());
-//            }
-//        } else {
-//            log.error("Time expired");
-//        }
-        return result;
-    }
 
     @Override
     public Usuario verifyPassword(Usuario user, String password) {
@@ -119,7 +90,7 @@ public class ServiceLogeoImpl implements ServiceLogeo {
                     .setSubject(Constants.SUBJECT)
                     .setIssuer(Constants.ISSUER)
                     .setExpiration(Date
-                            .from(LocalDateTime.now().plusSeconds(1).atZone(ZoneId.systemDefault())
+                            .from(LocalDateTime.now().plusHours(10).atZone(ZoneId.systemDefault())
                                     .toInstant()))
                     .claim(Constants.USERNAME, user.getNombre())
                     .claim(Constants.ROLES, roles)

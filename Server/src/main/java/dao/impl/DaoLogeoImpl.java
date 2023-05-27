@@ -31,22 +31,6 @@ public class DaoLogeoImpl implements DaoLogeo {
 
 
     @Override
-    public Usuario get(String email) {
-        Usuario result = null;
-        try {
-            JdbcTemplate jtm = new JdbcTemplate(pool.getDataSource());
-            List<Usuario> list = jtm.query(QueryConstants.GET_USER_BY_EMAIL, BeanPropertyRowMapper.newInstance(Usuario.class), email);
-            if (list.size() == 0) {
-                return null;
-            }
-            result = list.get(0);
-        } catch (Exception e) {
-            throw new NotFoundException(ErrorConstants.ERROR_FIND_USER_WITH_EMAIL);
-        }
-        return result;
-    }
-
-    @Override
     public Usuario getByUsername(String username) {
         Usuario result = null;
         try {
@@ -114,31 +98,5 @@ public class DaoLogeoImpl implements DaoLogeo {
         return result;
     }
 
-    @Override
-    public Usuario findOneByActivationCode(String activationCode) {
-        Usuario result = null;
-        try {
-            JdbcTemplate jtm = new JdbcTemplate(pool.getDataSource());
-            List<Usuario> list = jtm.query(QueryConstants.GET_USER_BY_ACTIVATION_CODE, BeanPropertyRowMapper.newInstance(Usuario.class), activationCode);
-            if (list.size() == 0) {
-                return null;
-            }
-            result = list.get(0);
-        } catch (Exception e) {
-            throw new NotFoundException(ErrorConstants.ERROR_FIND_USER_WITH_ACTIVATION_CODE);
-        }
-        return result;
-    }
 
-    @Override
-    public int updateActivatedByToken(int activated, String activation_code) {
-        int result = 0;
-        try {
-            JdbcTemplate jtm = new JdbcTemplate(pool.getDataSource());
-            result = jtm.update(QueryConstants.UPDATE_ACTIVATED_BY_ACTIVATION_CODE, activated, activation_code);
-        } catch (Exception e) {
-            throw new InternalServerException(ErrorConstants.ERROR_UPDATE_USER_ACTIVATED);
-        }
-        return result;
-    }
 }

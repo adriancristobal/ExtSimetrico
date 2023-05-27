@@ -6,10 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.Usuario;
 import ui.screens.common.BaseScreenController;
 
@@ -19,7 +16,13 @@ import java.util.ResourceBundle;
 
 public class RegisterController extends BaseScreenController implements Initializable {
     @FXML
-    private TextField tfEmail;
+    private ComboBox<Integer> cbHabilityLevel;
+    @FXML
+    private RadioButton rbContratista;
+    @FXML
+    private ToggleGroup tgType;
+    @FXML
+    private RadioButton rbSicario;
     @FXML
     private PasswordField tfPassword;
     @FXML
@@ -38,17 +41,14 @@ public class RegisterController extends BaseScreenController implements Initiali
 
     @FXML
     private void btnRegisterClick(ActionEvent actionEvent) {
-        String email = tfEmail.getText();
-        String password = tfPassword.getText();
         String username = tfUsername.getText();
-        int activated = 0;
-        String activation_token = null;
-        Date date_register = null;
-        int id_reader = 3;
-        if (email.isEmpty() || password.isEmpty() || username.isEmpty()) {
-            errorBox.setText("Email, username or password empty");
+        String password = tfPassword.getText();
+        String type = ((RadioButton) tgType.getSelectedToggle()).getText();
+        int habilidad = cbHabilityLevel.getValue();
+        if (username.isEmpty() || password.isEmpty() || type.isEmpty() || habilidad == 0) {
+            errorBox.setText("Please complete all fields");
         } else {
-            Usuario userRegisterDTO = new Usuario(username, password/*, tipo, habilidad*/);
+            Usuario userRegisterDTO = new Usuario(username, password, type, habilidad);
             errorBox.setText("");
             getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
             registerViewModel.register(userRegisterDTO);
@@ -66,9 +66,8 @@ public class RegisterController extends BaseScreenController implements Initiali
                     }
                     if (registerStateNew.isRegister()) {
                         getPrincipalController().rootScreenPrincipal.setCursor(Cursor.DEFAULT);
-                        alert("Login", "You have receive a mail to your gmail count. Verify you are", Alert.AlertType.INFORMATION);
+                        alert("Login", "Now you can login", Alert.AlertType.INFORMATION);
                     } else {
-                        alert("Email", "This email exit yet. You receive another mail to that email or you can log normally", Alert.AlertType.INFORMATION);
                         getPrincipalController().rootScreenPrincipal.setCursor(Cursor.DEFAULT);
                     }
 
@@ -86,6 +85,8 @@ public class RegisterController extends BaseScreenController implements Initiali
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);
+        cbHabilityLevel.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        cbHabilityLevel.getSelectionModel().select(0);
         changeStatus();
     }
 
