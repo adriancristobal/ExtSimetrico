@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.fxType.FXMLContratistaController">
+
+    <ListView fx:id="lvContratos" layoutX="14.0" layoutY="12.0" prefHeight="375.0" prefWidth="200.0" />
+
+    <GridPane layoutX="293.0" layoutY="37.0">
+
+        <Label text="Título:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="tfTitulo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Objetivo:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="tfObjetivo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Precio:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="tfPrecio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Nivel de Habilidad:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+      <ComboBox fx:id="cbHabilityLevel" prefHeight="26.0" prefWidth="95.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+
+    </GridPane>
+
+    <HBox alignment="CENTER_RIGHT" layoutX="328.0" layoutY="200.0" spacing="10.0" />
+
+    <HBox alignment="CENTER_RIGHT" layoutX="220.0" layoutY="300.0" spacing="10.0" />
+   <Button fx:id="btnContratoSendToSicario" disable="true" layoutX="379.0" layoutY="329.0" mnemonicParsing="false" text="Send" />
+     <ComboBox fx:id="sicarioComboBox" disable="true" layoutX="387.0" layoutY="285.0" prefWidth="150.0" />
+
+     <Label layoutX="277.0" layoutY="289.0" text="Seleccionar Sicario:" />
+
+     <Button fx:id="btnAdd" layoutX="330.0" layoutY="175.0" text="Añadir" />
+     <Button fx:id="btnUpdate" disable="true" layoutX="391.0" layoutY="175.0" text="Actualizar" />
+     <Button fx:id="btnDelete" disable="true" layoutX="470.0" layoutY="175.0" text="Eliminar" />
+
+</AnchorPane>
