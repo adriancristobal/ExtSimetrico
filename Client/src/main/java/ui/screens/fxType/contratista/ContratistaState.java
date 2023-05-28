@@ -17,6 +17,7 @@ public class ContratistaState {
     private final boolean added;
     private final boolean updated;
     private final boolean deleted;
+    private final boolean send;
     private final boolean change;
     private final String message;
 }

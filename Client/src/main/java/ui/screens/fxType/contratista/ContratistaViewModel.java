@@ -7,16 +7,20 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import model.SicarioContrato;
 import service.ServiceContratoClient;
+import service.ServiceSicarioContratoClient;
 import service.impl.ServiceContratoClientImpl;
 
 public class ContratistaViewModel {
 
     private final ServiceContratoClient serviceContratoClient;
 
+    private ServiceSicarioContratoClient serviceSicarioContratoClient;
+
     @Inject
-    public ContratistaViewModel(ServiceContratoClientImpl serviceContratoClient) {
+    public ContratistaViewModel(ServiceContratoClientImpl serviceContratoClient, ServiceSicarioContratoClient serviceSicarioContratoClient) {
         this.serviceContratoClient = serviceContratoClient;
-        _state = new SimpleObjectProperty<>(new ContratistaState(null,null, false,false,false,false,false, null));
+        this.serviceSicarioContratoClient = serviceSicarioContratoClient;
+        _state = new SimpleObjectProperty<>(new ContratistaState(null,null, false,false,false,false,false,false, null));
     }
 
     private final ObjectProperty<ContratistaState> _state;
@@ -30,9 +34,9 @@ public class ContratistaViewModel {
                 .subscribe(either -> {
                     ContratistaState contratistaState = null;
                     if (either.isLeft())
-                        contratistaState = new ContratistaState(null, null, true, false, false, false, !getState().get().isChange(), either.getLeft());
+                        contratistaState = new ContratistaState(null, null, true, false, false, false, false,!getState().get().isChange(), either.getLeft());
                     else
-                        contratistaState = new ContratistaState(either.get(), null, true,false,false, false, !getState().get().isChange(), null);
+                        contratistaState = new ContratistaState(either.get(), null, true,false,false, false, false,!getState().get().isChange(), null);
                     _state.setValue(contratistaState);
                 });
     }
@@ -43,9 +47,22 @@ public class ContratistaViewModel {
                 .subscribe(either -> {
                     ContratistaState contratistaState = null;
                     if (either.isLeft())
-                        contratistaState = new ContratistaState(null, null, true, false, false, false, !getState().get().isChange(), either.getLeft());
+                        contratistaState = new ContratistaState(null, null, true, false, false, false, false,!getState().get().isChange(), either.getLeft());
                     else
-                        contratistaState = new ContratistaState(null, either.get(),true,false,false, false, !getState().get().isChange(), null);
+                        contratistaState = new ContratistaState(null, either.get(),true,false,false, false, false,!getState().get().isChange(), null);
+                    _state.setValue(contratistaState);
+                });
+    }
+
+    public void sendContratoToSicario(SicarioContrato sicarioContrato) {
+        serviceSicarioContratoClient.sendContratoToSicario(sicarioContrato)
+                .subscribeOn(Schedulers.single())
+                .subscribe(either -> {
+                    ContratistaState contratistaState = null;
+                    if (either.isLeft())
+                        contratistaState = new ContratistaState(null, null, true, false, false, false, false, !getState().get().isChange(), either.getLeft());
+                    else
+                        contratistaState = new ContratistaState(null, null,true,false,false, false, true,!getState().get().isChange(), null);
                     _state.setValue(contratistaState);
                 });
     }

@@ -2,7 +2,9 @@ package service.impl;
 
 import com.google.gson.Gson;
 import dao.DaoContratoClient;
+import dao.DaoSicarioContratoClient;
 import dao.impl.DaoContratoClientImpl;
+import dao.impl.DaoSicarioContratoClientImpl;
 import io.reactivex.rxjava3.core.Single;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
@@ -66,4 +68,5 @@ public class ServiceContratoClientImpl implements ServiceContratoClient {
     public Single<Either<String, List<Usuario>>> getSicariosByHabilityLevel(int habilityLevel) {
         return dao.getSicariosByHabilityLevel(habilityLevel);
     }
+
 }

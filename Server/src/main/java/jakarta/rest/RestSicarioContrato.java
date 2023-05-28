@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicReference;
 @Path(PathsConstants.PATH_SICARIO_CONTRATO)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@RolesAllowed({Constants.ROLE_SICARIO})
 public class RestSicarioContrato {
 
     private final ServiceSicarioContrato service;
@@ -28,6 +27,7 @@ public class RestSicarioContrato {
 
 
     @GET
+    @RolesAllowed({Constants.ROLE_SICARIO})
     public Response getAll() {
         AtomicReference<Response> r = new AtomicReference<>();
         service.getAll()
@@ -48,6 +48,7 @@ public class RestSicarioContrato {
     }
 
     @DELETE
+    @RolesAllowed({Constants.ROLE_SICARIO})
     public Response delete(@QueryParam(Constants.ID_CONTRATO) String idContrato, @QueryParam(Constants.ID_SICARIO) String idSicario) {
         if (service.delete(Integer.parseInt(idContrato), Integer.parseInt(idSicario))) {
             return Response.status(Response.Status.NO_CONTENT).entity(idContrato + idSicario).build();
@@ -57,6 +58,7 @@ public class RestSicarioContrato {
     }
 
     @PUT
+    @RolesAllowed({Constants.ROLE_SICARIO})
     public SicarioContrato update(SicarioContrato sicarioContrato) {
         return service.update(sicarioContrato);
     }

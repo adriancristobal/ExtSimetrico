@@ -13,11 +13,11 @@ public interface CallSicarioContratoApi {
     @GET("sicariosContratos")
     Single<List<SicarioContrato>> getAllSicarioContratos();
     @GET("sicariosContratos/{id}")
-    Single<Contrato> getSicarioContratoById(@Path("id") int id);
+    Single<SicarioContrato> getSicarioContratoById(@Path("id") int id);
     @POST("sicariosContratos")
-    Single<Contrato> postSicarioContrato(@Body SicarioContrato sicarioContrato);
+    Single<SicarioContrato> postSicarioContrato(@Body SicarioContrato sicarioContrato);
     @PUT("sicariosContratos")
-    Single<Contrato> putSicarioContrato(@Body SicarioContrato sicarioContrato);
+    Single<SicarioContrato> putSicarioContrato(@Body SicarioContrato sicarioContrato);
     @DELETE("sicariosContratos")
     Single<Response<Void>> deleteSicarioContrato(@Query("id") int id);
 }

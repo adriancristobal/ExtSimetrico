@@ -122,6 +122,11 @@ public class ContratistaController extends BaseScreenController implements Initi
                         btnContratoSendToSicario.setDisable(false);
                         sicarioComboBox.getItems().addAll(newState.getSicarioList());
                     }
+                    if (newState.isSend()){
+                        clearFields();
+                        buttonsRestart();
+                        alert("Success", "Contrato sent to the sicario", Alert.AlertType.INFORMATION);
+                    }
                     if (newState.isLoading()){
                         getPrincipalController().rootScreenPrincipal.setCursor(Cursor.DEFAULT);
                     }
@@ -172,5 +177,13 @@ public class ContratistaController extends BaseScreenController implements Initi
         lvContratos.getSelectionModel().clearSelection();
         buttonsRestart();
         clearFields();
+    }
+
+    @FXML
+    private void sendContratoToSicario(ActionEvent actionEvent) {
+        Usuario sicario = sicarioComboBox.getSelectionModel().getSelectedItem();
+        Detalle contrato = lvContratos.getSelectionModel().getSelectedItem();
+        SicarioContrato sicarioContrato = new SicarioContrato(contrato.getIdContratista(), sicario.getId());
+        contratistaViewModel.sendContratoToSicario(sicarioContrato);
     }
 }

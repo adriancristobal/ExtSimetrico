@@ -23,4 +23,5 @@ public interface ServiceContratoClient {
     Single<Either<String, String>> deleteContrato(int id);
 
     Single<Either<String, List<Usuario>>> getSicariosByHabilityLevel(int habilityLevel);
+
 }

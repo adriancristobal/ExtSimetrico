@@ -23,4 +23,5 @@ public interface CallContratoApi {
     Single<Response<Void>> deleteContrato(@Query("id") int id);
     @GET("contratos/byHabilityLevel")
     Single<List<Usuario>> getSicariosByHabilityLevel(@Query("habilityLevel") Integer habilityLevel);
+
 }

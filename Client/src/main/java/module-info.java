@@ -49,4 +49,5 @@ module Client {
     exports ui.screens.fxAccount.login;
     exports dao.retrofit.produces.constants;
     exports modelClient;
+    exports dao.impl;
 }

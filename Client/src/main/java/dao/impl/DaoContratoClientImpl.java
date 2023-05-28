@@ -49,4 +49,6 @@ public class DaoContratoClientImpl extends DaoGenerics implements DaoContratoCli
         return this.safeSingleApicall(myApi.getSicariosByHabilityLevel(habilityLevel));
     }
 
+
+
 }
