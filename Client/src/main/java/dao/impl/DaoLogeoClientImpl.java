@@ -13,6 +13,7 @@ import model.Usuario;
 import model.exception.ApiError;
 import okhttp3.Credentials;
 import okhttp3.MediaType;
+import retrofit2.HttpException;
 
 import java.util.Objects;
 
@@ -34,24 +35,30 @@ public class DaoLogeoClientImpl extends DaoGenerics implements DaoLogeoClient {
     }
 
     @Override
-    public Single<Either<String, Boolean>> login(String username, String password) {
+    public Single<Either<Object, Usuario>> login(String username, String password) {
 
         return myApi.login(username, password).map(response -> {
-                    Either<String, Boolean> result = Either.left("Error de comunicacion");
-                    if (response.isSuccessful()) {
-                        cacheAuthorization.setUser(username);
-                        cacheAuthorization.setPassword(password);
-                        String jwt = response.headers().get(ConstantsInterceptor.AUTHORIZATION);
-                        cacheAuthorization.setJwt(jwt);
-                        result = Either.right(true);
-                    } else if (Objects.equals(response.errorBody().contentType(), MediaType.get("application/json"))) {
-                        Gson g = new Gson();
-                        ApiError apierror = g.fromJson(response.errorBody().charStream(), ApiError.class);
-                        result = Either.left(apierror.getMessage());
-                    }
-                    return result;
+                    cacheAuthorization.setUser(username);
+                    cacheAuthorization.setPassword(password);
+                    String jwt = response.headers().get(ConstantsInterceptor.AUTHORIZATION);
+                    cacheAuthorization.setJwt(jwt);
+                    return Either.right(response.body());
                 })
-                .subscribeOn(Schedulers.io());
+                .subscribeOn(Schedulers.io())
+                .onErrorReturn(throwable -> {
+                    Either<Object, Usuario> error = Either.left(new ApiError("Error de comunicacion").getMessage());
+                    if (throwable instanceof HttpException) {
+                        if (Objects.equals(((HttpException) throwable).response().errorBody().contentType(), MediaType.get("application/json"))) {
+                            Gson g = new Gson();
+                            ApiError apierror = g.fromJson(((HttpException) throwable).response().errorBody().string(), ApiError.class);
+                            error = Either.left(apierror.getMessage());
+                        } else {
+                            error = Either.left(((HttpException) throwable).response().message());
+                        }
+                    }
+                    return error;
+                });
+
     }
 
 

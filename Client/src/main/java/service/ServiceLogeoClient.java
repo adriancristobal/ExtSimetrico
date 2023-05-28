@@ -8,7 +8,7 @@ public interface ServiceLogeoClient {
 
     Single<Either<String, Boolean>> register(Usuario userRegisterDTO);
 
-    Single<Either<String, Boolean>> login(String username, String password);
+    Single<Either<String, Usuario>> login(String username, String password);
 
     Single<Either<String, Boolean>> loginHeader(String username, String password);
 }

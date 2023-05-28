@@ -19,6 +19,7 @@ module Client {
     requires retrofit2.converter.gson;
     requires retrofit2.converter.scalars;
     requires java.sql;
+    requires Security;
 
     opens dao.impl;
     opens common.config;
@@ -29,6 +30,7 @@ module Client {
     opens ui.screens.fxAccount.login;
     opens ui.screens.fxAccount.register;
     opens modelClient;
+    opens service.jsonConverter;
 
 
 
@@ -50,4 +52,5 @@ module Client {
     exports dao.retrofit.produces.constants;
     exports modelClient;
     exports dao.impl;
+    exports service.jsonConverter;
 }

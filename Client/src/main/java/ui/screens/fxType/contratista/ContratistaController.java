@@ -71,6 +71,17 @@ public class ContratistaController extends BaseScreenController implements Initi
     }
     @FXML
     private void add(ActionEvent actionEvent) {
+        Contrato contrato = new Contrato();
+        Detalle detalle = new Detalle();
+        detalle.setTitulo(tfTitulo.getText());
+        detalle.setObjetivo(tfObjetivo.getText());
+        detalle.setPrecio(Double.parseDouble(tfPrecio.getText()));
+        detalle.setNivelHabilidad(cbHabilityLevel.getValue());
+        contrato.setDetalle(detalle.toString());
+        contrato.setClave("vinicius");
+        contrato.setId_contratista(getPrincipalController().getUsuario().getId());
+        getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
+        contratistaViewModel.addContrato(contrato);
     }
 
     @FXML

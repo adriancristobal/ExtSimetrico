@@ -8,7 +8,7 @@ public interface DaoLogeoClient {
 
     Single<Either<String, Boolean>> register(Usuario userRegisterDTO);
 
-    Single<Either<String, Boolean>> login(String username, String password);
+    Single<Either<Object, Usuario>> login(String username, String password);
 
     Single<Either<String, Boolean>> loginHeader(String username, String password);
 

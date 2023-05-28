@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
+import model.Usuario;
 import ui.screens.common.BaseScreenController;
 import ui.screens.common.Screens;
 
@@ -30,6 +31,8 @@ public class PrincipalController {
 
     private Stage primaryStage;
 
+    public Usuario usuario;
+
     Instance<Object> instance;
 
     private final Alert alert;
@@ -40,7 +43,13 @@ public class PrincipalController {
         alert= new Alert(Alert.AlertType.NONE);
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     private void cambioScreen(Pane screenNueva) {
         rootScreenPrincipal.setCenter(screenNueva);

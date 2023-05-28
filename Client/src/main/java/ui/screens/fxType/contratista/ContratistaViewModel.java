@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import model.Contrato;
 import model.SicarioContrato;
 import service.ServiceContratoClient;
 import service.ServiceSicarioContratoClient;
@@ -63,6 +64,19 @@ public class ContratistaViewModel {
                         contratistaState = new ContratistaState(null, null, true, false, false, false, false, !getState().get().isChange(), either.getLeft());
                     else
                         contratistaState = new ContratistaState(null, null,true,false,false, false, true,!getState().get().isChange(), null);
+                    _state.setValue(contratistaState);
+                });
+    }
+
+    public void addContrato(Contrato contrato) {
+        serviceContratoClient.postContrato(contrato)
+                .subscribeOn(Schedulers.single())
+                .subscribe(either -> {
+                    ContratistaState contratistaState = null;
+                    if (either.isLeft())
+                        contratistaState = new ContratistaState(null, null, true, false, false, false, false, !getState().get().isChange(), either.getLeft());
+                    else
+                        contratistaState = new ContratistaState(null, null,true,true,false, false, false,!getState().get().isChange(), null);
                     _state.setValue(contratistaState);
                 });
     }

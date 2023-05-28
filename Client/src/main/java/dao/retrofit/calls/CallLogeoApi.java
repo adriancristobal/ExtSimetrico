@@ -11,7 +11,7 @@ public interface CallLogeoApi {
     Single<Boolean> register(@Body Usuario userRegisterDTO);
     /////////////////////////
     @GET("login")
-    Single<Response<Void>> login(@Query("username") String username, @Query("password") String password);
+    Single<Response<Usuario>> login(@Query("username") String username, @Query("password") String password);
     @GET("login")
     Single<Boolean> loginHeader(@Header("Authorization") String basicAuthorization);
 }

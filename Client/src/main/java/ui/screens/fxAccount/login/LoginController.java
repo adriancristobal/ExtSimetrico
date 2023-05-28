@@ -57,6 +57,7 @@ public class LoginController extends BaseScreenController implements Initializab
                     if (loginStateNew.isLoad()){
                         getPrincipalController().rootScreenPrincipal.setCursor(Cursor.DEFAULT);
                         this.getPrincipalController().onLoginHecho();
+                        this.getPrincipalController().setUsuario(loginStateNew.getUsuario());
                     }
                     if(!loginStateNew.isLoad() && loginStateNew.getMessage() == null){
                         errorBox.setText("User or password incorrect");

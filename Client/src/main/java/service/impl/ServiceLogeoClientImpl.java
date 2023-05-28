@@ -25,8 +25,15 @@ public class ServiceLogeoClientImpl implements ServiceLogeoClient {
     }
 
     @Override
-    public Single<Either<String, Boolean>> login(String username, String password) {
-        return dao.login(username, password);
+    public Single<Either<String, Usuario>> login(String username, String password) {
+        Single<Either<Object, Usuario>> either = dao.login(username, password);
+        return either.map(either1 -> {
+            if (either1.isRight()) {
+                return Either.right(either1.get());
+            } else {
+                return Either.left(either1.getLeft().toString());
+            }
+        });
     }
 
     @Override
