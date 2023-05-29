@@ -12,6 +12,8 @@ public interface DaoContratoClient {
 
     Single<Either<String, List<Contrato>>> getAllContratos();
 
+    Single<Either<String, List<Contrato>>> getContratosByIdContratista(Integer idContratista);
+
     Single<Either<String, Contrato>> getContratoById(int id);
 
     Single<Either<String, Contrato>> postContrato(Contrato contrato);

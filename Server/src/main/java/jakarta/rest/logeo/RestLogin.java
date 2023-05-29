@@ -43,7 +43,7 @@ public class RestLogin {
             Usuario user = serviceLogeo.getByUsername(username);
             serviceLogeo.login(user, password.toCharArray(), user.getContrasenia());
             String jwt = serviceLogeo.generateJWS(user);
-            res.setHeader(HttpHeaders.AUTHORIZATION, jwt);
+            //res.setHeader(HttpHeaders.AUTHORIZATION, jwt);
             return Response.status(Response.Status.ACCEPTED).header(HttpHeaders.AUTHORIZATION, jwt).entity(user).build();
 
         }

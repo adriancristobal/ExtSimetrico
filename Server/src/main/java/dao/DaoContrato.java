@@ -9,7 +9,7 @@ import java.util.List;
 public interface DaoContrato {
 
     Either<ApiError, List<Contrato>> getAll();
-
+    Either<ApiError, List<Contrato>> getContratosByIdContratista(Integer idContratista);
     Either<ApiError, Contrato> get(int id);
 
     Contrato save(Contrato contrato);
@@ -17,4 +17,6 @@ public interface DaoContrato {
     Contrato update(Contrato contrato);
 
     boolean delete(int id);
+
+
 }

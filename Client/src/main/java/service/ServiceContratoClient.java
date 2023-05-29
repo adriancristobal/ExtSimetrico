@@ -14,6 +14,8 @@ public interface ServiceContratoClient {
 
     Single<Either<String, List<Detalle>>> getAllContratos();
 
+    Single<Either<String, List<Detalle>>> getContratosByIdContratista(Integer idContratista);
+
     Single<Either<String, Contrato>> getContratoById(int id);
 
     Single<Either<String, Contrato>> postContrato(Contrato ingredient);

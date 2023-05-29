@@ -9,6 +9,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import model.Usuario;
 import ui.screens.common.BaseScreenController;
 
 import java.net.URL;
@@ -55,9 +56,10 @@ public class LoginController extends BaseScreenController implements Initializab
                         errorBox.setText(loginStateNew.getMessage());
                     }
                     if (loginStateNew.isLoad()){
-                        getPrincipalController().rootScreenPrincipal.setCursor(Cursor.DEFAULT);
+                        Usuario usuario = loginStateNew.getUsuario();
+                        this.getPrincipalController().setUsuario(usuario);
                         this.getPrincipalController().onLoginHecho();
-                        this.getPrincipalController().setUsuario(loginStateNew.getUsuario());
+                        getPrincipalController().rootScreenPrincipal.setCursor(Cursor.DEFAULT);
                     }
                     if(!loginStateNew.isLoad() && loginStateNew.getMessage() == null){
                         errorBox.setText("User or password incorrect");

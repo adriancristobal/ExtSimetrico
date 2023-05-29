@@ -10,15 +10,16 @@ import model.SicarioContrato;
 import service.ServiceContratoClient;
 import service.ServiceSicarioContratoClient;
 import service.impl.ServiceContratoClientImpl;
+import service.impl.ServiceSicarioContratoClientImpl;
 
 public class ContratistaViewModel {
 
     private final ServiceContratoClient serviceContratoClient;
 
-    private ServiceSicarioContratoClient serviceSicarioContratoClient;
+    private final ServiceSicarioContratoClient serviceSicarioContratoClient;
 
     @Inject
-    public ContratistaViewModel(ServiceContratoClientImpl serviceContratoClient, ServiceSicarioContratoClient serviceSicarioContratoClient) {
+    public ContratistaViewModel(ServiceContratoClientImpl serviceContratoClient, ServiceSicarioContratoClientImpl serviceSicarioContratoClient) {
         this.serviceContratoClient = serviceContratoClient;
         this.serviceSicarioContratoClient = serviceSicarioContratoClient;
         _state = new SimpleObjectProperty<>(new ContratistaState(null,null, false,false,false,false,false,false, null));
@@ -29,8 +30,8 @@ public class ContratistaViewModel {
         return _state;
     }
 
-    public void getContratosByContratista() {
-        serviceContratoClient.getAllContratos()
+    public void getContratosByContratista(int idUsuarioContratista) {
+        serviceContratoClient.getContratosByIdContratista(idUsuarioContratista)
                 .subscribeOn(Schedulers.single())
                 .subscribe(either -> {
                     ContratistaState contratistaState = null;
@@ -41,6 +42,19 @@ public class ContratistaViewModel {
                     _state.setValue(contratistaState);
                 });
     }
+    public void getAllContratos(/*int idUsuarioContratista*/) {
+        serviceContratoClient.getAllContratos(/*idUsuarioContratista*/)
+                .subscribeOn(Schedulers.single())
+                .subscribe(either -> {
+                    ContratistaState contratistaState = null;
+                    if (either.isLeft())
+                        contratistaState = new ContratistaState(null, null, true, false, false, false, false,!getState().get().isChange(), either.getLeft());
+                    else
+                        contratistaState = new ContratistaState(either.get(), null, true,false,false, false, false,!getState().get().isChange(), null);
+                    _state.setValue(contratistaState);
+                });
+    }
+
 
     public void getSicariosByHabilityLevel(int habilityLevel) {
         serviceContratoClient.getSicariosByHabilityLevel(habilityLevel)

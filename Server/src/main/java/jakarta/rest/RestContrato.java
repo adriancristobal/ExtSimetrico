@@ -52,6 +52,19 @@ public class RestContrato {
                         .build()));
         return r.get();
     }
+
+    @GET
+    @Path(PathsConstants.PATH_ID_CONTRATISTA)
+    public Response getContratosByIdContratista(@QueryParam(Constants.ID_CONTRATISTA) Integer idContratista) {
+        AtomicReference<Response> r = new AtomicReference<>();
+        serviceContrato.getContratosByIdContratista(idContratista)
+                .peek(list -> r.set(Response.ok(list).build()))
+                .peekLeft(apiError -> r.set(Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity(apiError)
+                        .build()));
+        return r.get();
+    }
+
     @POST
     public Response add(Contrato contrato) {
         serviceContrato.add(contrato);

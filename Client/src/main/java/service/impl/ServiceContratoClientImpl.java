@@ -52,6 +52,24 @@ public class ServiceContratoClientImpl implements ServiceContratoClient {
     }
 
     @Override
+    public Single<Either<String, List<Detalle>>> getContratosByIdContratista(Integer idContratista) {
+        List<Detalle> detalleList = new ArrayList<>();
+        Encryption encryption = new EncryptionAES();
+        Single<Either<String, List<Contrato>>> result = dao.getContratosByIdContratista(idContratista);
+        if (result == null) {
+            return Single.just(Either.left("No hay contratos"));
+        } else {
+            List<Contrato> contratoListdao = result.blockingGet().get();
+            for (Contrato contrato : contratoListdao) {
+                String detalleJson = encryption.decrypt(contrato.getDetalle(), contrato.getClave());
+                Detalle detalle = gson.fromJson(detalleJson, Detalle.class);
+                detalleList.add(detalle);
+            }
+        }
+        return Single.just(Either.right(detalleList));
+    }
+
+    @Override
     public Single<Either<String, Contrato>> getContratoById(int id) {
         return dao.getContratoById(id);
     }

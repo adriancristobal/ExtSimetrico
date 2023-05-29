@@ -16,6 +16,7 @@ import ui.screens.common.BaseScreenController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 
 public class ContratistaController extends BaseScreenController implements Initializable {
 
@@ -56,7 +57,7 @@ public class ContratistaController extends BaseScreenController implements Initi
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);
-        loadContratoList();
+//        loadContratoList();
         cbHabilityLevel.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         cbHabilityLevel.getSelectionModel().selectFirst();
         changeStatus();
@@ -92,15 +93,16 @@ public class ContratistaController extends BaseScreenController implements Initi
     private void delete(ActionEvent actionEvent) {
     }
 
-    private void loadContratoList() {
-        tfTitulo.setText("");
-        tfObjetivo.setText("");
-        tfPrecio.setText("");
-        cbHabilityLevel.getSelectionModel().selectFirst();
-        lvContratos.getItems().clear();
-        contratistaViewModel.getContratosByContratista();
-//        getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
-    }
+//    private void loadContratoList() {
+//        tfTitulo.setText("");
+//        tfObjetivo.setText("");
+//        tfPrecio.setText("");
+//        cbHabilityLevel.getSelectionModel().selectFirst();
+//        lvContratos.getItems().clear();
+//        contratistaViewModel.getAllContratos();
+//        //todo lo que sea llamar al getPrincipalController(), nose si por que esta funcion esta en el inizialize, supongo que es por eso, no funciona
+////        getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
+//    }
 
     private void changeStatus() {
         contratistaViewModel.getState().addListener((observableValue, state, newState) ->
@@ -196,5 +198,16 @@ public class ContratistaController extends BaseScreenController implements Initi
         Detalle contrato = lvContratos.getSelectionModel().getSelectedItem();
         SicarioContrato sicarioContrato = new SicarioContrato(contrato.getIdContratista(), sicario.getId());
         contratistaViewModel.sendContratoToSicario(sicarioContrato);
+    }
+
+    @FXML
+    private void chargeMyContratos(ActionEvent actionEvent) {
+        tfTitulo.setText("");
+        tfObjetivo.setText("");
+        tfPrecio.setText("");
+        cbHabilityLevel.getSelectionModel().selectFirst();
+        lvContratos.getItems().clear();
+        contratistaViewModel.getContratosByContratista(getPrincipalController().getUsuario().getId());
+        getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
     }
 }
