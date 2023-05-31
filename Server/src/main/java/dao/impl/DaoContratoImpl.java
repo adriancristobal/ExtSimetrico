@@ -59,6 +59,19 @@ public class DaoContratoImpl implements DaoContrato {
     }
 
     @Override
+    public Either<ApiError, List<Contrato>> getContratosByIdSicario(Integer idSicario) {
+        Either<ApiError, List<Contrato>> result;
+        try {
+            JdbcTemplate jtm = new JdbcTemplate(pool.getDataSource());
+            List<Contrato> list = jtm.query(QueryConstants.GET_CONTRATOS_BY_ID_SICARIO, BeanPropertyRowMapper.newInstance(Contrato.class), idSicario);
+            result = Either.right(list);
+        } catch (Exception e) {
+            result = Either.left(new ApiError(ErrorConstants.ERROR_FIND_CONTRATO_LIST));
+        }
+        return result;
+    }
+
+    @Override
     public Either<ApiError, Contrato> get(int id) {
         return null;
     }

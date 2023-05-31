@@ -27,10 +27,12 @@ module Client {
     opens ui.main;
     opens ui.screens.principal;
     opens ui.screens.fxType.contratista;
+    opens ui.screens.fxType.sicario;
     opens ui.screens.fxAccount.login;
     opens ui.screens.fxAccount.register;
     opens modelClient;
     opens service.jsonConverter;
+
 
 
 
@@ -43,7 +45,7 @@ module Client {
     exports dao.retrofit.calls;
     exports dao.retrofit.produces;
     exports ui.screens.fxType.contratista;
-//    exports ui.screens.fxType.sicario;
+    exports ui.screens.fxType.sicario;
     exports dao.retrofit;
     exports ui.screens.welcome;
     exports ui.screens.fxAccount.register;

@@ -7,7 +7,8 @@ public enum Screens {
     LOGOUT("/fxml/fxmlAccount/FXMLLogout.fxml"),
 
     WELCOME ("/fxml/FXMLWelcome.fxml"),
-    SCREEN_CONTRATISTAS("/fxml/fxmlType/contratista/FXMLContratista.fxml");
+    SCREEN_CONTRATISTAS("/fxml/fxmlType/contratista/FXMLContratista.fxml"),
+    SCREEN_SICARIOS("/fxml/fxmlType/sicario/FXMLSicario.fxml");
 
     private final String rutaScreen;
     Screens(String ruta) {

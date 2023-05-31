@@ -10,6 +10,7 @@ public interface DaoContrato {
 
     Either<ApiError, List<Contrato>> getAll();
     Either<ApiError, List<Contrato>> getContratosByIdContratista(Integer idContratista);
+    Either<ApiError, List<Contrato>> getContratosByIdSicario(Integer idSicario);
     Either<ApiError, Contrato> get(int id);
 
     Contrato save(Contrato contrato);

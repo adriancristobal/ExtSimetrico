@@ -15,6 +15,8 @@ public interface CallContratoApi {
     Single<List<Contrato>> getAllContratos();
     @GET("contratos/byIdContratista")
     Single<List<Contrato>> getContratosByIdContratista(@Query("idContratista") Integer idContratista);
+    @GET("contratos/byIdSicario")
+    Single<List<Contrato>> getContratosByIdSicario(@Query("idSicario") Integer idSicario);
     @GET("contratos/{id}")
     Single<Contrato> getContratoById(@Path("id") int id);
     @POST("contratos")

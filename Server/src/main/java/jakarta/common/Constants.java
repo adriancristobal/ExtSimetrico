@@ -30,5 +30,6 @@ public class Constants {
 
 
     public static final String HABILITY_LEVEL = "habilityLevel";
-    public static final String ID_CONTRATISTA = "idContratista";
+    public static final String IDD_CONTRATISTA = "idContratista";
+    public static final String IDD_SICARIO = "idSicario";
 }

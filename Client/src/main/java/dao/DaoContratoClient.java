@@ -13,6 +13,7 @@ public interface DaoContratoClient {
     Single<Either<String, List<Contrato>>> getAllContratos();
 
     Single<Either<String, List<Contrato>>> getContratosByIdContratista(Integer idContratista);
+    Single<Either<String, List<Contrato>>> getContratosByIdSicario(Integer idSicario);
 
     Single<Either<String, Contrato>> getContratoById(int id);
 

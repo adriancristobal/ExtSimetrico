@@ -21,12 +21,9 @@
                         <MenuItem fx:id="menuContratistaItem" mnemonicParsing="false" onAction="#menuClick" text="WorkSpace Contratistas" />
                     </items>
                 </Menu>
-                <Menu fx:id="menuRecipes" mnemonicParsing="false" text="Article">
+                <Menu fx:id="menuSicario" mnemonicParsing="false" text="Sicarios">
                     <items>
-                        <MenuItem fx:id="menuGetAllRecipes" mnemonicParsing="false" onAction="#menuClick" text="Recipes and by id" />
-                    </items>
-                    <items>
-                        <MenuItem fx:id="menuAddRecipe" mnemonicParsing="false" onAction="#menuClick" text="Add Recipe" />
+                        <MenuItem fx:id="menuSicarioItem" mnemonicParsing="false" onAction="#menuClick" text="WorkSpace Sicariso" />
                     </items>
                 </Menu>
             </menus>

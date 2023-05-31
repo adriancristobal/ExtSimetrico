@@ -29,6 +29,12 @@ public class DaoContratoClientImpl extends DaoGenerics implements DaoContratoCli
     public Single<Either<String, List<Contrato>>> getContratosByIdContratista(Integer idContratista) {
         return this.safeSingleApicall(myApi.getContratosByIdContratista(idContratista));
     }
+
+    @Override
+    public Single<Either<String, List<Contrato>>> getContratosByIdSicario(Integer idSicario) {
+        return this.safeSingleApicall(myApi.getContratosByIdSicario(idSicario));
+    }
+
     @Override
     public Single<Either<String, Contrato>> getContratoById(int id) {
         return this.safeSingleApicall(myApi.getContratoById(id));

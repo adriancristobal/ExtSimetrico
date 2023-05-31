@@ -21,4 +21,5 @@ public class QueryConstants {
     public static final String ADD_USER = "INSERT INTO usuarios (nombre, contrasenia, tipo, habilidad) VALUES (:nombre, :contrasenia, :tipo, :habilidad)";
 
     public static final String GET_CONTRATOS_BY_ID_CONTRATISTA = "SELECT * FROM contratos WHERE id_contratista = ?";
+    public static final String GET_CONTRATOS_BY_ID_SICARIO = "SELECT * FROM contratos WHERE id IN (SELECT id_contrato FROM sicarios_contratos WHERE id_sicario = ?)";
 }

@@ -29,6 +29,11 @@ public class ServiceContratoImpl implements ServiceContrato {
     }
 
     @Override
+    public Either<ApiError, List<Contrato>> getContratosByIdSicario(Integer idSicario) {
+        return daoContrato.getContratosByIdSicario(idSicario);
+    }
+
+    @Override
     public Either<ApiError, Contrato> get(int id) {
         return daoContrato.get(id);
     }

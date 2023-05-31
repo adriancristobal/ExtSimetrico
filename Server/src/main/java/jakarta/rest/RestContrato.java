@@ -18,7 +18,6 @@ import java.util.concurrent.atomic.AtomicReference;
 @Path(PathsConstants.PATH_CONTRATO)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@RolesAllowed({Constants.ROLE_CONTRATISTA})
 public class RestContrato {
 
     private final ServiceContrato serviceContrato;
@@ -31,6 +30,7 @@ public class RestContrato {
     }
 
     @GET
+    @RolesAllowed({Constants.ROLE_CONTRATISTA})
     public Response getAll() {
         AtomicReference<Response> r = new AtomicReference<>();
         serviceContrato.getAll()
@@ -43,6 +43,7 @@ public class RestContrato {
 
     @GET
     @Path(PathsConstants.PATH_BY_HABILITY_LEVEL)
+    @RolesAllowed({Constants.ROLE_CONTRATISTA})
     public Response getSicariosByHabilityLevel(@QueryParam(Constants.HABILITY_LEVEL) Integer habilityLevel) {
         AtomicReference<Response> r = new AtomicReference<>();
         service.getSicariosByHabilityLevel(habilityLevel)
@@ -55,7 +56,8 @@ public class RestContrato {
 
     @GET
     @Path(PathsConstants.PATH_ID_CONTRATISTA)
-    public Response getContratosByIdContratista(@QueryParam(Constants.ID_CONTRATISTA) Integer idContratista) {
+    @RolesAllowed({Constants.ROLE_CONTRATISTA})
+    public Response getContratosByIdContratista(@QueryParam(Constants.IDD_CONTRATISTA) Integer idContratista) {
         AtomicReference<Response> r = new AtomicReference<>();
         serviceContrato.getContratosByIdContratista(idContratista)
                 .peek(list -> r.set(Response.ok(list).build()))
@@ -65,7 +67,21 @@ public class RestContrato {
         return r.get();
     }
 
+    @GET
+    @Path(PathsConstants.PATH_ID_SICARIO)
+    @RolesAllowed({Constants.ROLE_SICARIO})
+    public Response getContratosByIdSicario(@QueryParam(Constants.IDD_SICARIO) Integer idSicario) {
+        AtomicReference<Response> r = new AtomicReference<>();
+        serviceContrato.getContratosByIdSicario(idSicario)
+                .peek(list -> r.set(Response.ok(list).build()))
+                .peekLeft(apiError -> r.set(Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity(apiError)
+                        .build()));
+        return r.get();
+    }
+
     @POST
+    @RolesAllowed({Constants.ROLE_CONTRATISTA})
     public Response add(Contrato contrato) {
         serviceContrato.add(contrato);
         //devolvemos un response en vez de solo el objeto ingredient para que el status sea 201
@@ -74,6 +90,7 @@ public class RestContrato {
     }
 
     @DELETE
+    @RolesAllowed({Constants.ROLE_CONTRATISTA})
     public Response delete(@QueryParam(QueryParamsConstants.ID) String id) {
         if (serviceContrato.delete(Integer.parseInt(id))) {
             return Response.status(Response.Status.NO_CONTENT).entity(id).build();
@@ -84,6 +101,7 @@ public class RestContrato {
 
 
     @PUT
+    @RolesAllowed({Constants.ROLE_CONTRATISTA})
     public Contrato update(Contrato contrato) {
         return serviceContrato.update(contrato);
     }

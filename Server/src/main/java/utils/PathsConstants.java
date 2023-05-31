@@ -24,4 +24,5 @@ public class PathsConstants {
     public static final String PATH_BY_HABILITY_LEVEL = "/byHabilityLevel";
 
     public static final String PATH_ID_CONTRATISTA = "/byIdContratista";
+    public static final String PATH_ID_SICARIO = "/byIdSicario";
 }

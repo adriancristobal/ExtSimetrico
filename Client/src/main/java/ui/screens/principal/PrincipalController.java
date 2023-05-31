@@ -98,6 +98,7 @@ public class PrincipalController {
             case "menuLogin" -> cargarScreen(Screens.LOGIN);
             case "menuLogout" -> cargarScreen(Screens.LOGOUT);
             case "menuContratistaItem" -> cargarScreen(Screens.SCREEN_CONTRATISTAS);
+            case "menuSicarioItem" -> cargarScreen(Screens.SCREEN_SICARIOS);
         }
         /*if ("menuGetAllNewspaper".equals(((MenuItem) actionEvent.getSource()).getId())) {
             cargarScreen(Screens.Screen_GET_ALL_NEWSPAPER);
