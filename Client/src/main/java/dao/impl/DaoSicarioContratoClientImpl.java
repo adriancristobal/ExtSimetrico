@@ -8,6 +8,8 @@ import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import model.SicarioContrato;
 
+import java.util.List;
+
 public class DaoSicarioContratoClientImpl extends DaoGenerics implements DaoSicarioContratoClient {
 
     private final CallSicarioContratoApi myApi;
@@ -20,5 +22,15 @@ public class DaoSicarioContratoClientImpl extends DaoGenerics implements DaoSica
     @Override
     public Single<Either<String, SicarioContrato>> sendContratoToSicario(SicarioContrato sicarioContrato) {
         return this.safeSingleApicall(myApi.postSicarioContrato(sicarioContrato));
+    }
+
+    @Override
+    public Single<Either<String, List<SicarioContrato>>> getSicarioContratosBySicario(int sicarioId) {
+        return this.safeSingleApicall(myApi.getSicarioContratosBySicario(sicarioId));
+    }
+
+    @Override
+    public Single<Either<String, SicarioContrato>> updateEstado(SicarioContrato sicarioContrato) {
+        return this.safeSingleApicall(myApi.putSicarioContrato(sicarioContrato));
     }
 }

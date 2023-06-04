@@ -11,7 +11,7 @@ import java.util.List;
 public interface ServiceSicarioContrato {
 
     Either<ApiError, List<SicarioContrato>> getAll();
-
+    Either<ApiError, List<SicarioContrato>> getSicariosContratosBySicario(int idSicario);
     Either<ApiError, List<Usuario>> getSicariosByHabilityLevel(int parseInt);
     Either<ApiError, SicarioContrato> get(int id);
 

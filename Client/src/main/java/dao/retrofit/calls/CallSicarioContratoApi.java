@@ -12,8 +12,8 @@ public interface CallSicarioContratoApi {
 
     @GET("sicariosContratos")
     Single<List<SicarioContrato>> getAllSicarioContratos();
-    @GET("sicariosContratos/{id}")
-    Single<SicarioContrato> getSicarioContratoById(@Path("id") int id);
+    @GET("sicariosContratos/byIdSicario")
+    Single<List<SicarioContrato>> getSicarioContratosBySicario(@Query("idSicario") int id);
     @POST("sicariosContratos")
     Single<SicarioContrato> postSicarioContrato(@Body SicarioContrato sicarioContrato);
     @PUT("sicariosContratos")

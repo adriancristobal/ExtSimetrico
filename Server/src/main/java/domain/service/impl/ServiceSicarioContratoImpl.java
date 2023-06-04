@@ -25,6 +25,11 @@ public class ServiceSicarioContratoImpl implements ServiceSicarioContrato {
     }
 
     @Override
+    public Either<ApiError, List<SicarioContrato>> getSicariosContratosBySicario(int idSicario) {
+        return dao.getSicariosContratosBySicario(idSicario);
+    }
+
+    @Override
     public Either<ApiError, List<Usuario>> getSicariosByHabilityLevel(int parseInt) {
         return dao.getSicariosByHabilityLevel(parseInt);
     }

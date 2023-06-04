@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import model.Contrato;
 import model.SicarioContrato;
 import model.Usuario;
+import model.enums.Estado;
 import modelClient.Detalle;
 import ui.screens.common.BaseScreenController;
 
@@ -196,7 +197,8 @@ public class ContratistaController extends BaseScreenController implements Initi
     private void sendContratoToSicario(ActionEvent actionEvent) {
         Usuario sicario = sicarioComboBox.getSelectionModel().getSelectedItem();
         Detalle contrato = lvContratos.getSelectionModel().getSelectedItem();
-        SicarioContrato sicarioContrato = new SicarioContrato(contrato.getIdContratista(), sicario.getId());
+        Estado estado = Estado.PENDIENTE;
+        SicarioContrato sicarioContrato = new SicarioContrato(contrato.getIdContrato(), sicario.getId(), estado);
         contratistaViewModel.sendContratoToSicario(sicarioContrato);
     }
 

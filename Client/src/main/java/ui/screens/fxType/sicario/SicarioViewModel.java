@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import model.SicarioContrato;
 import service.ServiceContratoClient;
 import service.ServiceSicarioContratoClient;
 import service.impl.ServiceContratoClientImpl;
@@ -21,7 +22,7 @@ public class SicarioViewModel {
     public SicarioViewModel(ServiceContratoClientImpl serviceContratoClient, ServiceSicarioContratoClientImpl serviceSicarioContratoClient) {
         this.serviceContratoClient = serviceContratoClient;
         this.serviceSicarioContratoClient = serviceSicarioContratoClient;
-        _state = new SimpleObjectProperty<>(new SicarioState(null, false,false,false,null));
+        _state = new SimpleObjectProperty<>(new SicarioState(null, null,false,false,false,null));
     }
 
     private final ObjectProperty<SicarioState> _state;
@@ -35,9 +36,35 @@ public class SicarioViewModel {
                 .subscribe(either -> {
                     SicarioState sicarioState = null;
                     if (either.isLeft())
-                        sicarioState = new SicarioState(null, true, false, !getState().get().isChange(), either.getLeft());
+                        sicarioState = new SicarioState(null, null,true, false, !getState().get().isChange(), either.getLeft());
                     else
-                        sicarioState = new SicarioState(either.get(), true, false, !getState().get().isChange(), null);
+                        sicarioState = new SicarioState(either.get(), null,true, false, !getState().get().isChange(), null);
+                    _state.setValue(sicarioState);
+                });
+    }
+
+    public void getSicarioContratosBySicario(int idUsuarioSicario) {
+        serviceSicarioContratoClient.getSicarioContratosBySicario(idUsuarioSicario)
+                .subscribeOn(Schedulers.single())
+                .subscribe(either -> {
+                    SicarioState sicarioState = null;
+                    if (either.isLeft())
+                        sicarioState = new SicarioState(null, null,true, false, !getState().get().isChange(), either.getLeft());
+                    else
+                        sicarioState = new SicarioState(null, either.get(), true, false, !getState().get().isChange(), null);
+                    _state.setValue(sicarioState);
+                });
+    }
+
+    public void updateEstado(SicarioContrato sicarioContrato) {
+        serviceSicarioContratoClient.updateEstado(sicarioContrato)
+                .subscribeOn(Schedulers.single())
+                .subscribe(either -> {
+                    SicarioState sicarioState = null;
+                    if (either.isLeft())
+                        sicarioState = new SicarioState(null, null,true, false, !getState().get().isChange(), either.getLeft());
+                    else
+                        sicarioState = new SicarioState(null, null,true, true, !getState().get().isChange(), null);
                     _state.setValue(sicarioState);
                 });
     }

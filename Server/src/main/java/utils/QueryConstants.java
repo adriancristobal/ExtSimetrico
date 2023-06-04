@@ -9,10 +9,11 @@ public class QueryConstants {
 
 
     public static final String GET_ALL_SICARIOS_CONTRATOS = "SELECT * FROM sicarios_contratos";
+    public static final String GET_SICARIOS_CONTRATOS_BY_SICARIO = "SELECT * FROM sicarios_contratos WHERE id_sicario = ?";
     public static final String GET_SICARIOS_CONTRATOS_BY_HABILITY_LEVEL = "SELECT * FROM usuarios WHERE habilidad >= ?";
     public static final String ADD_SICARIO_CONTRATO = "INSERT INTO sicarios_contratos (id_contrato, id_sicario, estado) VALUES (:id_contrato, :id_sicario, :estado)";
     public static final String DELETE_SICARIO_CONTRATO  = "DELETE FROM sicarios_contratos WHERE id_contrato = ? AND id_sicario = ?";
-    public static final String UPDATE_SICARIO_CONTRATO = "UPDATE recipes SET estado = ? WHERE id_contrato = ? AND id_sicario = ?";
+    public static final String UPDATE_SICARIO_CONTRATO = "UPDATE sicarios_contratos SET estado = :estado WHERE id_contrato = :id_contrato AND id_sicario = :id_sicario";
 
 
     public static final String GET_USER_BY_USERNAME = "SELECT * FROM usuarios WHERE nombre = ?";

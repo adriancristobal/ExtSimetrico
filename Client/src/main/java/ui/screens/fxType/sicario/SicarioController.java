@@ -11,6 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import model.Contrato;
+import model.SicarioContrato;
+import model.enums.Estado;
 import modelClient.Detalle;
 import ui.screens.common.BaseScreenController;
 
@@ -18,6 +21,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SicarioController extends BaseScreenController implements Initializable {
+    @FXML
+    private ListView<Estado> lvEstados;
     @FXML
     private Button btnUpdate;
     @FXML
@@ -39,10 +44,21 @@ public class SicarioController extends BaseScreenController implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);
         changeStatus();
+        cbEstado.getItems().addAll("ACEPTADO", "RECHAZADO", "PENDIENTE", "COMPLETADO");
     }
     @FXML
     private void updateEstadoContrato(ActionEvent actionEvent) {
-
+        if (lvContratos.getSelectionModel().getSelectedItem() != null && cbEstado.getValue() != null) {
+            Detalle detalle = lvContratos.getSelectionModel().getSelectedItem();
+            SicarioContrato sicarioContrato = new SicarioContrato();
+            sicarioContrato.setId_sicario(getPrincipalController().usuario.getId());
+            sicarioContrato.setId_contrato(detalle.getIdContrato());
+            sicarioContrato.setEstado(Estado.valueOf(cbEstado.getValue()));
+            sicarioViewModel.updateEstado(sicarioContrato);
+            getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
+        } else {
+            alert("Error", "Select a contract and a state", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -54,8 +70,9 @@ public class SicarioController extends BaseScreenController implements Initializ
     }
 
     @FXML
-    private void chargeList(ActionEvent actionEvent) {
+    private void chargeList() {
         sicarioViewModel.getContratosBySicario(getPrincipalController().usuario.getId());
+        sicarioViewModel.getSicarioContratosBySicario(getPrincipalController().usuario.getId());
         getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
     }
 
@@ -71,9 +88,17 @@ public class SicarioController extends BaseScreenController implements Initializ
                         lvContratos.getItems().clear();
                         lvContratos.getItems().addAll(newState.getContratoList());
                     }
+                    if (newState.getSicarioList() != null) {
+                        lvEstados.getItems().clear();
+                        for (SicarioContrato sicarioContrato : newState.getSicarioList()) {
+                            lvEstados.getItems().add(sicarioContrato.getEstado());
+                        }
+                    }
                     if(newState.isUpdated()) {
                         clearFields();
                         buttonsRestart();
+//                        updateDetalleOfContrato();
+                        chargeList();
                         alert("Success", "Contrato updated", Alert.AlertType.INFORMATION);
                     }
                     if (newState.isLoading()){
@@ -83,6 +108,15 @@ public class SicarioController extends BaseScreenController implements Initializ
         );
 
     }
+
+//    private void updateDetalleOfContrato() {
+//        Detalle detalle = lvContratos.getSelectionModel().getSelectedItem();
+//        detalle.setEstado(cbEstado.getValue());
+//        Contrato contrato = new Contrato(detalle.getIdContrato(), detalle.toString());
+//        sicarioViewModel.updateDetalleOfContrato();
+//        getPrincipalController().rootScreenPrincipal.setCursor(Cursor.WAIT);
+//    }
+
 
     private void buttonsRestart() {
         lvContratos.getSelectionModel().clearSelection();

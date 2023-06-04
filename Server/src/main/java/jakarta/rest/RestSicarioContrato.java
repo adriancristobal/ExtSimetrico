@@ -38,6 +38,19 @@ public class RestSicarioContrato {
         return r.get();
     }
 
+    @GET
+    @Path(PathsConstants.PATH_ID_SICARIO)
+    @RolesAllowed({Constants.ROLE_SICARIO})
+    public Response getAllBySicario(@QueryParam(Constants.IDD_SICARIO) Integer idSicario) {
+        AtomicReference<Response> r = new AtomicReference<>();
+        service.getSicariosContratosBySicario(idSicario)
+                .peek(list -> r.set(Response.ok(list).build()))
+                .peekLeft(apiError -> r.set(Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity(apiError)
+                        .build()));
+        return r.get();
+    }
+
 
 
     @POST

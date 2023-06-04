@@ -6,17 +6,19 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.fxType.sicario.SicarioController">
 
 
-    <Label layoutX="163.0" layoutY="24.0" text="CONTRATOS" />
+    <Label layoutX="140.0" layoutY="24.0" text="CONTRATOS" />
 
-    <ListView fx:id="lvContratos" layoutX="10.0" layoutY="54.0" onMouseClicked="#selectedItem" prefHeight="270.0" prefWidth="375.0" />
+    <ListView fx:id="lvContratos" layoutX="21.0" layoutY="54.0" onMouseClicked="#selectedItem" prefHeight="248.0" prefWidth="307.0" />
 
 
-    <Label layoutX="396.0" layoutY="94.0" text="Estado del contrato:" />
+    <Label layoutX="367.0" layoutY="322.0" text="Estado del contrato:" />
 
-    <ComboBox fx:id="cbEstado" disable="true" layoutX="525.0" layoutY="90.0" />
+    <ComboBox fx:id="cbEstado" disable="true" layoutX="483.0" layoutY="318.0" />
 
-    <Button fx:id="btnUpdate" disable="true" layoutX="468.0" layoutY="138.0" onAction="#updateEstadoContrato" text="Actualizar" />
-   <Button layoutX="161.0" layoutY="337.0" mnemonicParsing="false" text="Charge list" onAction="#chargeList" />
+    <Button fx:id="btnUpdate" disable="true" layoutX="426.0" layoutY="357.0" onAction="#updateEstadoContrato" text="Actualizar" />
+   <Button layoutX="138.0" layoutY="340.0" mnemonicParsing="false" onAction="#chargeList" text="Charge list" />
+   <ListView fx:id="lvEstados" layoutX="356.0" layoutY="54.0" prefHeight="248.0" prefWidth="209.0" />
+   <Label layoutX="438.0" layoutY="24.0" text="ESTADO" />
 
 
 </AnchorPane>
